@@ -1,0 +1,22 @@
+[
+  {
+    "name": "收藏",
+    "state": "History",
+    "icon": "ion-ios-heart-outline"
+  },
+  {
+    "name": "历史",
+    "state": "History",
+    "icon": "ion-ios-clock-outline"
+  },
+  {
+    "name": "搜索",
+    "state": "History",
+    "icon": "ion-search"
+  },
+  {
+    "name": "设置",
+    "state": "option",
+    "icon": "ion-android-options"
+  }
+]

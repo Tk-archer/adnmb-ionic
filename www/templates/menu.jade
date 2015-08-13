@@ -1,0 +1,29 @@
+//
+   Created by Fszer on 2015/6/30.
+
+ion-side-menus(enable-menu-with-back-views='false')
+   ion-side-menu-content
+      ion-nav-bar.bar.bar-header.bar-dark
+         ion-nav-back-button
+         ion-nav-buttons(side='left')
+            button.button.button-icon.ion-navicon(menu-toggle='left')
+         //ion-nav-buttons(side='right')
+            button.button.button-clear(ng-show="show") Edit
+      ion-nav-view(name='menuContent')
+   ion-side-menu(side='left')
+      ion-header-bar.bar-assertive
+         h1.title
+            |匿名版
+      ion-content
+         ion-list
+            a.item.item-divider.item-icon-left(  ng-repeat="conf in configs" nav-clear menu-close ui-sref="app."+"{{conf.state}}")
+               | {{conf.name}}
+               i.icon(class="{{conf.icon}}")
+         ion-list(ng-repeat="menu in menus")
+            a.item.item-icon-right(nav-clear  ng-click="flag=!flag")
+               |{{menu.head}}
+               i.icon.ion-chevron-right
+            ion-list(ng-show="flag" )
+                  a.item.item-divider( ng-repeat="name in menu.data"  href='#/app/p{{name.url}}' menu-close  )
+                     | {{name.name}}
+

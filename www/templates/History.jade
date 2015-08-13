@@ -1,0 +1,17 @@
+//
+   Created by Fszer on 2015/7/28.
+ion-view(view-title='History')
+    ion-content
+        ion-list
+            ion-item
+                |开发中
+        //.list.card(ng-repeat='data in datas')
+            .item.item-divider(data-ng-bind-html="data.uid |toHtml")
+            ion-item(href= "#/app/thread/{{data.id}}" nav-clear).item.item-body
+                a( ng-href= "{{data.image | img }}" )
+                    img( ng-src="{{data.thumb | img}} " )
+                div(data-ng-bind-html="data.content |toHtml")
+            .item.item-divider(style="text-align: right")
+                p
+                    | �ظ���{{data.replyCount}}
+                b {{data.createdAt|date : 'yyyy-MM-dd hh:ss '}}

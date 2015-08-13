@@ -1,0 +1,25 @@
+//
+   Created by Fszer on 2015/6/29.
+
+ion-view(view-title='{{name}}')
+    ion-nav-buttons(side="right")
+        a.button.button-icon.ion-compose(ng-href="#/app/reply/{{name}}")
+    ion-content.bg
+        ion-refresher( ng-if="conf.loading" pulling-text="下拉刷新..."  on-refresh="doRefresh()"  spinner="android" )
+        ion-list.list-inset(ng-if="conf.loading")
+            .item(ng-repeat='data in datas'  )
+                ion-item.item-body.plate( href="#/app/t/{{data.id}}")
+                    p.uid(data-ng-bind-html="data.uid |toHtml")
+                    a( ng-href= "{{data.image | img }}" )
+                        img( ng-src="{{data.thumb | img}} " )
+                    p(data-ng-bind-html="data.content |toHtml")
+                .item.item-divider(style="text-align: right")
+                    p
+                        | 回复：{{data.replyCount}}
+                    b {{data.createdAt|date : 'yy-MM-dd hh:ss '}}
+        .row
+            .col-offset-33.col-33.center( ng-if="!conf.loading" )
+                |loading
+                br
+                ion-spinner( icon="android")
+        ion-infinite-scroll(ng-if="conf.more" on-infinite="getMore()" distance="3%" immediate-check="false" spinner="android")

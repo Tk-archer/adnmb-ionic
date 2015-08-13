@@ -1,0 +1,64 @@
+/* Empty. Add your own CSS if you like */
+.items > a {
+
+    padding: 0px !important;
+}
+
+.blist {
+    height: 100px;
+    width: 100px;
+}
+
+.plate>a {
+    padding: 0 !important;
+}
+.plate {
+    padding: 0 0 0 16px !important;
+}
+
+.oc {
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.ds {
+    position: relative;
+    overflow: hidden;
+
+}
+
+.emjo {
+    cursor: pointer;
+    transition: ease 0.1s;
+}
+
+.emjo:active {
+    opacity: 0.8;
+    background-color: #00d6b2;
+    transition: ease 0.2s;
+
+}
+
+.emjolist {
+    box-shadow: 2px 2px 5px rgba(34, 34, 34, 0.44);
+    background-color: rgba(0, 255, 127, 0.2);
+    height: 300px;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.bg{
+    background-color: #f5f5f5;
+}
+.message {
+    text-align: center;
+    width: 200px !important;
+    height: 100px !important;
+}

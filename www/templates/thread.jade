@@ -1,0 +1,41 @@
+//
+   Created by Fszer on 2015/6/30.
+
+
+mixin content( str,click )
+    .item.row
+        p.col(data-ng-bind-html= str + ".uid | po : uid | toHtml")
+        p.col(style="text-align: center")="{{" + str + ".createdAt|date : 'yyyy-MM-dd '}}"
+        p.col(style="text-align: right ")='No.{{' + str + '.id}}'
+    .item.item-body(ng-click=click on-hold="onHold($event)")
+        a( ng-href= "{{" + str + ".image | img }}" )
+            img( ng-src="{{ " + str + ".thumb | img}} " )
+        br
+        p( data-ng-bind-html= str + ".content |toHtml " )
+    if click
+        //.tabs-striped.tabs-background-dark.tabs-color-light(ng-show="flag")
+            .item.tabs.tabs-secondary
+                a.tab-item( href="#/app/reply/{{"+str+".id}}")
+                    | 回复
+                a.tab-item
+                    | 复制
+                a.tab-item
+                    | 举报
+
+ion-view(view-title='{{ id | no}}')
+    ion-nav-buttons(side="right")
+        a.button.button-icon.ion-compose(ng-href="#/app/reply/{{id}}")
+        button.button.button-clear(ng-click="jump()")
+            |jump
+    ion-content
+        ion-refresher(pulling-text="下拉刷新..."  on-refresh="doRefresh()"  spinner="android" )
+        ion-list.list
+            div(ng-repeat='reply in data')
+                +content('reply',"conf.flag=!conf.flag")
+        .row
+            .col-offset-33.col-33.center( ng-if="!conf.loading" )
+                |loading
+                br
+                ion-spinner( icon="android")
+        ion-infinite-scroll(ng-if="conf.more" on-infinite="getMore()" spinner="android")
+

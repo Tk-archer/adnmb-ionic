@@ -1,0 +1,14 @@
+//
+   Created by Fszer on 2015/7/1.
+
+mixin itmelist(title,ctrl)
+    ion-toggle(ng-model="setting."+ctrl)=title
+
+- var values = ['html','123','5546','685465'];
+ion-view(view-title='option')
+    ion-content
+        ion-list
+            each val,index in values
+                +itmelist(val,t)
+        ion-checkbox
+            |S123

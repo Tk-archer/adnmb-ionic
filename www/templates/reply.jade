@@ -1,0 +1,26 @@
+//
+   Created by Fszer on 2015/7/28.
+ion-view(view-title='reply')
+    ion-content
+        ion-list
+            form()
+                .item.item-input
+                    textarea( ng-model="form.textarea" name="content" rows='10'  placeholder="正文" )
+
+        ion-list
+            .tabs-icon-only.row
+                a.tab-item.col(ng-click="con.show=!con.show")
+                    i.icon.ion-happy-outline
+                div.tab-item.col()
+                    i.icon.ion-images.ds
+                        input.oc(type="file" ng-model="form.file" id="file" )
+                button.tab-item.col.button.button-block.button-positive(ng-click="cookies()" )
+        .padding
+            button.button.button-block.button-positive(ng-click="send(form.textarea,$event)" )
+                |发送
+        .padding(ng-if="con.show")
+            .emjolist(ng-click="emot($event)")
+                .row( ng-repeat="row in emjos")
+                    .emjo.padding.col( ng-repeat="rs in row" value="{{rs}}")
+                        |{{rs}}
+
