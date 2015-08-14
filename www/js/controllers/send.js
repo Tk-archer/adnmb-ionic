@@ -24,7 +24,7 @@ AdNmb.controller('sendCtrl',
             console.log($stateParams.target);
             $scope.send = function (data,$event) {
                 $scope.form.file = document.getElementById("file").files[0];
-                console.log($scope.form);
+
                 $scope.popover.show($event);
                 reply.set({
                     No: $stateParams.target,
@@ -32,8 +32,8 @@ AdNmb.controller('sendCtrl',
                     file: $scope.form.file
                 });
                 reply.send(function (data) {
-                    console.log(data.code);
-                    data.code==="200"? $scope.sen.ok=true:$scope.sen.errs=true;
+                    console.log(data);
+                    data!=="错误"? $scope.sen.ok=true:$scope.sen.errs=true;
                     $timeout(function () {
                         $scope.popover.remove();
 

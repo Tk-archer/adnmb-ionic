@@ -27,7 +27,6 @@ AcFilter.filter('no', function () {
 
 AcFilter.filter('po', function () {
     return function (input,id) {
-        console.log(id,input)
         return id===input?input+"(po)":input;
     };
 });

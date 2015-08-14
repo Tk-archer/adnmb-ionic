@@ -197,11 +197,10 @@ service.service("reply", [ function () {
                 type: 'POST',
                 data: reply.data,
                 contentType: false,
-                processData: false,
-                beforeSend:setHeader
-            }).success(function (end) {
-                console.log("ok",end);
-                cb(end);
+                processData: false
+            }).success(function (end,status,code) {
+                console.log("ok",code);
+                cb(code.responseJSON);
             }).error(function (err) {
                 console.log(err);
                 cb(err.responseJSON);
@@ -269,9 +268,6 @@ lites = function (res) {
     return list;
 };
 
-function setHeader(xhr){
-    xhr.setRequestHeader('Set-Cookie', window.localStorage.getItem("Cookies"));
-}
 function sd(list) {
     var s = 0;
     var tmp = [];
