@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in send.js
 angular.module('adnmb', ['ionic', 'adnmb.controllers', 'adnmb.services','AcFilter'
-,'ngCookies'])
+])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {

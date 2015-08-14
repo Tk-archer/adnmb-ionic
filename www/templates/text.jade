@@ -13,7 +13,7 @@ ion-view(view-title='{{name}}')
                     a( ng-href= "{{data.image | img }}" )
                         img( ng-src="{{data.thumb | img}} " )
                     p(data-ng-bind-html="data.content |toHtml")
-                .item.item-divider(style="text-align: right")
+                .plate_bottom.item.item-divider(style="text-align: right")
                     p
                         | 回复：{{data.replyCount}}
                     b {{data.createdAt|date : 'yy-MM-dd hh:ss '}}

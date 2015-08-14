@@ -3,11 +3,11 @@
 
 
 mixin content( str,click )
-    .item.row
+    .item.row.thread_head
         p.col(data-ng-bind-html= str + ".uid | po : uid | toHtml")
         p.col(style="text-align: center")="{{" + str + ".createdAt|date : 'yyyy-MM-dd '}}"
         p.col(style="text-align: right ")='No.{{' + str + '.id}}'
-    .item.item-body(ng-click=click on-hold="onHold($event)")
+    .thread_content.item.item-body(ng-click=click on-hold="onHold($event)")
         a( ng-href= "{{" + str + ".image | img }}" )
             img( ng-src="{{ " + str + ".thumb | img}} " )
         br

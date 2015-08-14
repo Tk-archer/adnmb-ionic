@@ -17,12 +17,13 @@
  * */
 
 var service = angular.module('adnmb.services', []);
-var plateApi = "http://hacfun.tv/api/id?page=1&callback=JSON_CALLBACK";
-var ThreadApi = 'http://hacfun.tv/t/id.json?page=1&callback=JSON_CALLBACK';
-var refApi = 'http:/hacfun.tv/api/homepage/ref?tid=&callback=JSON_CALLBACK';
-var replyApi = "http://hacfun.tv/api/t/No/create";
-var NewApi = "http://hacfun.tv/api/No/create";
-var test = "http://hacfun.tv/api/No/create";
+var host="http://hacfun.tv/api/";
+var plateApi = host+"id?page=1";
+var ThreadApi = host+'t/id?page=1';
+var refApi = host+'/homepage/ref?tid=&callback=JSON_CALLBACK';
+var replyApi = host+"t/No/create";
+var NewApi = host+"api/No/create";
+var test = host+"api/No/create";
 
 service.service('Plate', ['$http', function ($http) {
     var plate = {
@@ -33,7 +34,7 @@ service.service('Plate', ['$http', function ($http) {
         repage: null,
         get: function (name, call) {
             console.log(plateApi.replace('id', name));
-            $http.jsonp(plateApi.replace('id', name), ["json"]).success(function (res) {
+            $http.get(plateApi.replace('id', name), ["json"]).success(function (res) {
                 plate.data = plate.lite(res);
                 plate.page = plate.repage = 1;
                 plate.id = res['forum']["name"];
@@ -67,7 +68,7 @@ service.service('Thread', ['$http', function ($http) {
         uid:null,
         get: function (num, call) {
 
-            $http.jsonp(ThreadApi.replace('id', num), ["json"]).success(function (res) {
+            $http.get(ThreadApi.replace('id', num), ["json"]).success(function (res) {
                 thread.uid=res['threads']["uid"];
                 thread.data = thread.lite(res);
                 thread.data.unshift(res['threads']);
@@ -80,7 +81,7 @@ service.service('Thread', ['$http', function ($http) {
         jump: function (page, cb) {
             var url = ThreadApi.replace('id', thread.id)
                 .replace("page=1", "page=" + page);
-            $http.jsonp(url, ["json"]).success(function (res) {
+            $http.get(url, ["json"]).success(function (res) {
                 thread.data = res['data'];
                 page == 1 ? thread.data.unshift(res['threads']) : null;
                 thread.repage = thread.page = page;
@@ -98,7 +99,7 @@ service.service('Thread', ['$http', function ($http) {
                 .replace('id', thread.id)
                 .replace('page=1', "page=" + thread.repage);
             console.log(thread.page, url);
-            $http.jsonp(url, ["json"]).success(function (res) {
+            $http.get(url, ["json"]).success(function (res) {
                 var reply = res['data'];
                 console.log(reply);
                 while (reply.length) {
@@ -126,7 +127,7 @@ service.service('Thread', ['$http', function ($http) {
                 .replace('id', thread["id"])
                 .replace('page=1', "page=" + thread.page);
             console.log(thread.page, url);
-            $http.jsonp(url, ["json"]).success(function (res) {
+            $http.get(url, ["json"]).success(function (res) {
                 res = res['replys'];
                 while (res.length) {
                     thread.data.push(res.shift());
@@ -165,7 +166,7 @@ service.service("config", ["$http", function ($http) {
     return config;
 }]);
 
-service.service("reply", ["$http", function ($http) {
+service.service("reply", [ function () {
     var reply = {
         content: "",
         file: null,
@@ -198,11 +199,11 @@ service.service("reply", ["$http", function ($http) {
                 contentType: false,
                 processData: false,
                 beforeSend:setHeader
-            }).success(function (end,request,setting,tt) {
+            }).success(function (end) {
                 console.log("ok",end);
                 cb(end);
             }).error(function (err) {
-                console.log(err.always());
+                console.log(err);
                 cb(err.responseJSON);
             });
 

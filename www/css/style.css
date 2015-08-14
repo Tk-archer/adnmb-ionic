@@ -13,7 +13,7 @@
     padding: 0 !important;
 }
 .plate {
-    padding: 0 0 0 16px !important;
+    padding: 0 0 5px 16px !important;
 }
 
 .oc {
@@ -61,4 +61,17 @@
     text-align: center;
     width: 200px !important;
     height: 100px !important;
+}
+.thread_head p{
+    padding: 0;
+}
+.uid{
+    margin-bottom: 0;
+}
+
+.thread_content{
+    padding: 0 0 5px 15px;
+}
+.plate_bottom{
+    padding-top:0 ;
 }

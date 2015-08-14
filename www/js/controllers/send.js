@@ -1,7 +1,7 @@
 
 AdNmb.controller('sendCtrl',
-    ['$scope', '$http', '$stateParams', '$ionicActionSheet', '$timeout', "reply",'$ionicPopover',"$cookies",
-        function ($scope, $http, $stateParams, $ionicActionSheet, $timeout, reply, $ionicPopover,$cookies) {
+    ['$scope', '$http', '$stateParams', '$ionicActionSheet', '$timeout', "reply",'$ionicPopover',
+        function ($scope, $http, $stateParams, $ionicActionSheet, $timeout, reply, $ionicPopover) {
             $scope.emjos=reply.glups(reply.emjos);
             $scope.con={};
             $scope.con.show=false;
@@ -37,7 +37,7 @@ AdNmb.controller('sendCtrl',
                     $timeout(function () {
                         $scope.popover.remove();
 
-                    },5000);
+                    },300);
 
                 })
             };
