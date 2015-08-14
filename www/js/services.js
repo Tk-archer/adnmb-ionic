@@ -33,7 +33,7 @@ service.service('Plate', ['$http', function ($http) {
         repage: null,
         get: function (name, call) {
             console.log(plateApi.replace('id', name));
-            $http.json(plateApi.replace('id', name), ["json"]).success(function (res) {
+            $http.jsonp(plateApi.replace('id', name), ["json"]).success(function (res) {
                 plate.data = plate.lite(res);
                 plate.page = plate.repage = 1;
                 plate.id = res['forum']["name"];
