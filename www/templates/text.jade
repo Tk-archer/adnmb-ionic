@@ -4,10 +4,10 @@
 ion-view(view-title='{{name}}')
     ion-nav-buttons(side="right")
         a.button.button-icon.ion-compose(ng-href="#/app/reply/{{name}}")
-    ion-content.bg
+    ion-content
         ion-refresher( ng-if="conf.loading" pulling-text="下拉刷新..."  on-refresh="doRefresh()"  spinner="android" )
         ion-list.list-inset(ng-if="conf.loading")
-            .item(ng-repeat='data in datas'  )
+            .item.bg(ng-repeat='data in datas'  )
                 ion-item.item-body.plate( href="#/app/t/{{data.id}}")
                     p.uid(data-ng-bind-html="data.uid |toHtml")
                     a( ng-href= "{{data.image | img }}" )
