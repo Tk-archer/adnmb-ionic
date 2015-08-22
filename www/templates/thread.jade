@@ -24,13 +24,13 @@ mixin content( str,click )
 
 ion-view(view-title='{{ id | no}}')
     ion-nav-buttons(side="right")
-        a.button.button-icon.ion-compose(ng-href="#/app/reply/{{id}}")
-        button.button.button-clear(ng-click="jump()")
+        a.button.button-icon.ion-more( ng-click="po.show($event);" )
+        //button.button.button-clear(ng-click="jump()")
             |jump
     ion-content
         ion-refresher(pulling-text="下拉刷新..."  on-refresh="doRefresh()"  spinner="android" )
         ion-list.list
-            div(ng-repeat='reply in data')
+            div(ng-repeat='reply in main')
                 +content('reply',"conf.flag=!conf.flag")
         .row
             .col-offset-33.col-33.center( ng-if="!conf.loading" )

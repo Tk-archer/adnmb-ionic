@@ -7,19 +7,20 @@ AdNmb.controller('threadCtrl', ['$scope', 'Thread', '$stateParams', '$ionicLoadi
         $scope.conf={
             flag:false,
             more:false,
-            loading:false
+            loading:false,
+            top:false
         };
         $scope.data={};
         $scope.id = $stateParams.threadId;
-
+        $scope.main={};
         $ionicPopover.fromTemplateUrl("/templates/blist.html", {scope: $scope, backdropClickToClose: true})
             .then(function (popover) {
                 $scope.po = popover;
             });
-        $scope.data={};
+
         Thread.get($stateParams.threadId, function () {
             $scope.conf.loading=true;
-            $scope.data = Thread.data;
+            $scope.main = Thread.data;
             $scope.uid=Thread.uid;
             $timeout(function () {
                 $scope.conf.more=true;
@@ -27,15 +28,17 @@ AdNmb.controller('threadCtrl', ['$scope', 'Thread', '$stateParams', '$ionicLoadi
 
         });
         $scope.jump = function () {
-
+            $scope.po.hide();
             $ionicPopup.prompt({
                 title: "跳转到",
                 subTitle: Thread.page+"/"+Thread.max,
                 scope: $scope
             }).then(function(){
-
+                if(!$scope.data.response||$scope.data.response===Thread.page)
+                    return ;
                 Thread.jump($scope.data.response, function () {
-                    $scope.data.data = Thread.data;
+                    console.log(Thread.data);
+                    $scope.main = Thread.data;
 
                 })
             });
@@ -48,7 +51,7 @@ AdNmb.controller('threadCtrl', ['$scope', 'Thread', '$stateParams', '$ionicLoadi
 
         $scope.doRefresh= function () {
             Thread.Refresh(function() {
-                console.log($scope.data.data);
+                console.log($scope.main);
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };

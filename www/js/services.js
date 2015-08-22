@@ -38,8 +38,8 @@ service.service('Plate', ['$http', function ($http) {
                 plate.data = plate.lite(res);
                 plate.page = plate.repage = 1;
                 plate.id = res['forum']["name"];
-                plate.max = parseInt(res['forum']["topicCount"] / 20);
-
+                plate.max = parseInt(res['page']["size"] / 20);
+                console.log(plate.max);
                 call();
             }).error(function (err,data) {
                 call(err,data);
@@ -82,7 +82,7 @@ service.service('Thread', ['$http', function ($http) {
             var url = ThreadApi.replace('id', thread.id)
                 .replace("page=1", "page=" + page);
             $http.get(url, ["json"]).success(function (res) {
-                thread.data = res['data'];
+                thread.data = thread.lite(res);
                 page == 1 ? thread.data.unshift(res['threads']) : null;
                 thread.repage = thread.page = page;
                 cb();
@@ -100,7 +100,7 @@ service.service('Thread', ['$http', function ($http) {
                 .replace('page=1', "page=" + thread.repage);
             console.log(thread.page, url);
             $http.get(url, ["json"]).success(function (res) {
-                var reply = res['data'];
+                var reply = res['replys'];
                 console.log(reply);
                 while (reply.length) {
                     thread.data.unshift(reply.pop());
@@ -240,9 +240,9 @@ getMore = function (obj, api, http, cb) {
     url = api
         .replace('id', obj["id"])
         .replace('page=1', "page=" + obj.page);
-    console.log(url);
-    http.jsonp(url, ["json"]).success(function (res) {
+    http.get(url, ["json"]).success(function (res) {
         res = obj.lite(res);
+        console.log(res);
         for (var i = 0; i < res.length; i++) {
             obj.data.push(res[i]);
         }

@@ -6,7 +6,8 @@ AdNmb.controller('textCtrl', ["$http",'$scope', 'Plate', '$stateParams', '$ionic
         $scope.name = $stateParams.name;
         $scope.conf={
             loading:false,
-            more:false
+            more:false,
+
         };
         $ionicPopover.fromTemplateUrl("/templates/blist.html", {scope: $scope, noBackdrop: true})
             .then(function (popover) {

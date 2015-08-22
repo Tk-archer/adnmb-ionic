@@ -1,8 +1,9 @@
 //
    Created by Fszer on 2015/7/31.
 ion-popover-view(class="blist")
-    ion-header-bar
-        h1.title
-            |My Popover Title
     ion-content
-        |Hello!
+        ion-list
+            ion-item(ng-href="#/app/reply/{{id}}")
+                = "new"
+            ion-item(ng-click="jump()")
+                = "jump"
